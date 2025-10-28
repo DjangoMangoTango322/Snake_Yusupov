@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snake_Yusupov", "Snake_Yusupov\Snake_Yusupov.csproj", "{7680DB30-14DC-4E2C-92A0-D6AA8DF8685E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D07C209E-64BF-43B8-B334-5A9ACF042E31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7680DB30-14DC-4E2C-92A0-D6AA8DF8685E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7680DB30-14DC-4E2C-92A0-D6AA8DF8685E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7680DB30-14DC-4E2C-92A0-D6AA8DF8685E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D07C209E-64BF-43B8-B334-5A9ACF042E31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D07C209E-64BF-43B8-B334-5A9ACF042E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D07C209E-64BF-43B8-B334-5A9ACF042E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D07C209E-64BF-43B8-B334-5A9ACF042E31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
