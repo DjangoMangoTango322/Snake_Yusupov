@@ -21,6 +21,7 @@ namespace Common
         public enum Direction { 
             Left,
             Right,
+            Up,
             Down,
             Start
         }
