@@ -43,6 +43,7 @@ namespace Snake_Yusupov
                 {
                     sender.Close();
                 }
+                //asda
             }
         }
         public static void Receiver()
