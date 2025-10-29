@@ -5,6 +5,8 @@ using Common;
 using System.Text;
 using System;
 using Newtonsoft.Json;
+using System.Threading;
+using System.Xml.Linq;
 
 namespace Snake_Yusupov
 {
@@ -97,6 +99,68 @@ namespace Snake_Yusupov
                 Console.WriteLine("Возникло исключение: " + exp.Message);
             }
         }
-
+        private static int AddSnake()
+        {
+            ViewModelGames viewModelGamesPlayer = new ViewModelGames();
+            viewModelGamesPlayer.SnakesPlayers = new Snakes()
+            {
+                Points = new List<Snakes.Point>() { 
+                    new Snakes.Point(30, 10),
+                    new Snakes.Point(20, 10),
+                    new Snakes.Point(10, 10)
+                },
+                direction = Snakes.Direction.Start
+            };
+            viewModelGamesPlayer.Points = new Snakes.Point(
+                new Random().Next(10, 783),
+                new Random().Next(10, 410));
+            viewModelGames.Add(viewModelGamesPlayer);
+            return viewModelGames.FindIndex(x => x == viewModelGamesPlayer);
+        }
+        public static void Timer()
+        {
+            while (true)
+            {
+                Thread.Sleep(100);
+                List<ViewModelGames> RemoteSnakes = viewModelGames.FindAll(x => x.SnakesPlayers.GameOver == true);
+                if (RemoteSnakes.Count > 0)
+                {
+                    foreach (ViewModelGames DeadSnake in RemoteSnakes) { 
+                        ViewModelUserSettings User = remoteIPAddress.Find(x => x.IdSnake == DeadSnake.IdSnake);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"Отклечил пользоmателя: {User.IpAddress}:{User.Port}"); 
+                        remoteIPAddress.Remove(User);
+                    }
+                    viewModelGames.RemoveAll(x => x.SnakesPlayers.GameOver == true);
+                    foreach (ViewModelUserSettings User in remoteIPAddress) { 
+                        Snakes Snake = viewModelGames.Find(x => x.IdSnake == User.IdSnake).SnakesPlayers;
+                        for (int iSnake = Snake.Points.Count - 1; iSnake >= 0; iSnake--)
+                        {
+                            if(iSnake != 0)
+                            {
+                                Snake.Points[iSnake] = Snake.Points[iSnake - 1];
+                            }
+                            else
+                            {
+                                int Speed = 10 + (int)Math.Round(Snake.Points.Count / 20f);
+                                if (Speed > MaxSpeed) Speed = MaxSpeed;
+                                if (Snake.direction == Snakes.Direction.Right)
+                                    Snake.Points[iSnake] = new Snakes.Point(Snake.Points[iSnake].X + Speed, Snake.Points[iSnake].Y); 
+                                if (Snake.direction == Snakes.Direction.Down)
+                                    Snake.Points[iSnake] = new Snakes.Point(Snake.Points[iSnake].X, Snake.Points[iSnake].Y + Speed);
+                                if (Snake.direction == Snakes.Direction.Up)
+                                    Snake.Points[iSnake] = new Snakes.Point(Snake.Points[iSnake].X, Snake.Points[iSnake].Y - Speed);
+                                if (Snake.direction == Snakes.Direction.Left)
+                                    Snake.Points[iSnake] = new Snakes.Point(Snake.Points[iSnake].X - Speed, Snake.Points[iSnake].Y);
+                                if (Snake.Points[0].x <= || Snake.Points[0].x >= 793)
+                                    Snake.GameOver = true;
+                                if(Snake.Points[0].Y <= 0 || Snake.Points[0].Y >= 420)
+                                    Snake.GameOver = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
