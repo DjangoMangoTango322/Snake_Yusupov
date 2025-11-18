@@ -217,5 +217,20 @@ namespace Snake_Yusupov
             sw.WriteLine(Json);
             sw.Close();
         }
+        public static void LoadLeaders()
+        {
+            if (File.Exists("./leaders.txt"))
+            {
+                StreamReader sr = new StreamReader("./leaders.txt");
+                string Json = sr.ReadLine();
+                sr.Close();
+                if (!String.IsNullOrEmpty(Json)){
+                    Leaders = JsonConvert.DeserializeObject<List<Leaders>>(Json);
+                }
+                else Leaders = new List<Leaders>();
+            }
+            else
+                Leaders = new List<Leaders>();
+        }
     }
 }
