@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Threading;
 using System.Xml.Linq;
 using System.Linq;
+using System.IO;
 
 namespace Snake_Yusupov
 {
@@ -208,6 +209,13 @@ namespace Snake_Yusupov
                     Send();
                 }
             }
+        }
+        public static void SaveLeaders()
+        {
+            string Json = JsonConvert.SerializeObject(Leaders);
+            StreamWriter sw = new StreamWriter("./leaders.txt");
+            sw.WriteLine(Json);
+            sw.Close();
         }
     }
 }
