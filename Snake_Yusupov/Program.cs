@@ -21,6 +21,17 @@ namespace Snake_Yusupov
         public static int MaxSpeed = 15;
         static void Main(string[] args)
         {
+            try
+            {
+                Thread thread = new Thread(new ThreadStart(Receiver));
+                thread.Start();
+                Thread threadTimer = new Thread(new ThreadStart(Timer)); 
+                threadTimer.Start();
+            }
+            catch (Exception exp) {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Возникло исключение: " + exp.Message);
+            }
         }
         private static void Send()
         {
