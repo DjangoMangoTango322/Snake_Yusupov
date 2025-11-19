@@ -35,7 +35,7 @@ namespace Snake_Yusupov
         }
         private static void Send()
         {
-            foreach (ViewModelUserSettings User in remoteIPAddress)
+            foreach (ViewModelUserSettings User in remoteIPAddress) 
             {
                 UdpClient sender = new UdpClient();
                 IPEndPoint endPoint = new IPEndPoint(
